@@ -2,24 +2,25 @@ CONFIG = "package.json"
 SERVICE = "server"
 SERVICE_URL = "http://localhost:8080/"
 SCALE ?= 1
-BIN = "./node_modules/.bin/pm2"
+BIN_PM2 = "./node_modules/.bin/pm2"
+BIN_AUTOCANNON = "./node_modules/.bin/autocannon"
 
 start:
 	@npm install
 	@npm run build
-	@$(BIN) start $(CONFIG)
+	@$(BIN_PM2) start $(CONFIG)
 
 stop:
-	@$(BIN) delete $(SERVICE)
+	@$(BIN_PM2) delete $(SERVICE)
 
 scale:
-	@$(BIN) scale $(SERVICE) $(SCALE)
+	@$(BIN_PM2) scale $(SERVICE) $(SCALE)
 
 logs:
-	@$(BIN) logs
+	@$(BIN_PM2) logs
 
 metrics:
-	@$(BIN) monit
+	@$(BIN_PM2) monit
 
 test:
-	npx autocannon --connections 120 --method GET --duration 30 $(SERVICE_URL)
+	@$(BIN_AUTOCANNON) --connections 120 --method GET --duration 30 $(SERVICE_URL)
