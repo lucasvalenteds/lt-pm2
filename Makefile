@@ -26,4 +26,4 @@ test:
 	@$(BIN_AUTOCANNON) --connections 120 --method GET --duration 30 $(URL)/
 
 shutdown:
-	@curl $(URL)/shutdown
+	@curl --verbose $(URL)/shutdown
