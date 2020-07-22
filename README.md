@@ -23,13 +23,6 @@ We also want to have metrics about the environment and the application behavior 
 
 ```
 $ make start
-audited 381 packages in 2.878s
-
-29 packages are looking for funding
-  run `npm fund` for details
-
-found 0 vulnerabilities
-
 [PM2][WARN] Applications server not running, starting...
 [PM2] App [server] launched (1 instances)
 ┌────┬────────────────────┬──────────┬──────┬───────────┬──────────┬──────────┐
