@@ -16,11 +16,11 @@ stop:
 scale:
 	@$(BIN_PM2) scale $(SERVICE) $(SCALE)
 
-logs:
-	@$(BIN_PM2) logs
+monitoring:
+	@$(BIN_PM2) monit
 
 metrics:
-	@$(BIN_PM2) monit
+	@$(BIN_PM2) show $(SERVICE)
 
 test:
 	@$(BIN_AUTOCANNON) --connections 120 --method GET --duration 30 $(URL)/
