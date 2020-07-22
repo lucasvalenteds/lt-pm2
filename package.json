@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "dist/index.js",
   "scripts": {
-    "start": "PORT=3000 nodemon index.ts",
+    "start": "nodemon index.ts",
     "test": "jest",
     "build": "tsc"
   },
@@ -85,5 +85,15 @@
       "eslint --fix",
       "prettier --write"
     ]
-  }
+  },
+  "apps": [
+    {
+      "name": "server",
+      "script": "./dist/index.js",
+      "exec_mode": "cluster",
+      "env": {
+        "PORT": 8080
+      }
+    }
+  ]
 }
