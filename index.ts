@@ -31,10 +31,10 @@ const server = HTTP.createServer((request, response): void => {
   const url = URL.parse(request.url!);
 
   if (url.path === "/shutdown") {
-    return shutdown(request, response);
+    shutdown(request, response);
+  } else {
+    health(request, response);
   }
-
-  return health(request, response);
 });
 
 server.listen(port, () => {
