@@ -11,10 +11,10 @@ const requestsTotal = PM2.counter({
 
 const port = Process.env.PORT;
 
-const index: HTTP.RequestListener = (_request, response): void => {
+const health: HTTP.RequestListener = (_request, response): void => {
   response.statusCode = 200;
   response.setHeader("Content-Type", "application/json");
-  response.write(JSON.stringify({ message: "Hello World" }));
+  response.write(JSON.stringify({ status: "up" }));
   response.end(() => {
     requestsTotal.inc();
   });
@@ -34,7 +34,7 @@ const server = HTTP.createServer((request, response): void => {
     return shutdown(request, response);
   }
 
-  return index(request, response);
+  return health(request, response);
 });
 
 server.listen(port, () => {
