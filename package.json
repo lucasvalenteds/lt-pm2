@@ -21,6 +21,16 @@
     "prettier": "2.0.5",
     "typescript": "3.9.7"
   },
+  "apps": [
+    {
+      "name": "server",
+      "script": "./dist/index.js",
+      "exec_mode": "cluster",
+      "env": {
+        "PORT": 8080
+      }
+    }
+  ],
   "eslintConfig": {
     "root": true,
     "ignorePatterns": [
@@ -67,15 +77,5 @@
       "eslint --fix",
       "prettier --write"
     ]
-  },
-  "apps": [
-    {
-      "name": "server",
-      "script": "./dist/index.js",
-      "exec_mode": "cluster",
-      "env": {
-        "PORT": 8080
-      }
-    }
-  ]
+  }
 }
