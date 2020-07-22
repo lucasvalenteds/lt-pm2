@@ -13,8 +13,14 @@ start:
 stop:
 	@$(BIN_PM2) delete $(SERVICE)
 
+list:
+	@$(BIN_PM2) ls
+
 scale:
 	@$(BIN_PM2) scale $(SERVICE) $(SCALE)
+
+logs:
+	@$(BIN_PM2) logs
 
 monitoring:
 	@$(BIN_PM2) monit
@@ -23,7 +29,10 @@ metrics:
 	@$(BIN_PM2) show $(SERVICE)
 
 test:
-	@$(BIN_AUTOCANNON) --connections 120 --method GET --duration 30 $(URL)/
+	@$(BIN_AUTOCANNON) --connections 250 --method GET --duration 30 $(URL)/
+
+health:
+	@curl --verbose $(URL)/
 
 shutdown:
 	@curl --verbose $(URL)/shutdown
