@@ -24,7 +24,7 @@ const shutdown: HTTP.RequestListener = (_request, response): void => {
   response.statusCode = 204;
   response.end(() => {
     requestsTotal.inc();
-    Process.exit(0);
+    Process.kill(Process.pid, "SIGTERM");
   });
 };
 
