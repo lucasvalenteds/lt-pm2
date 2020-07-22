@@ -9,7 +9,7 @@ const requestsTotal = PM2.counter({
   historic: false,
 });
 
-const health: HTTP.RequestListener = (_request, response): void => {
+const health: HTTP.RequestListener = (_request, response) => {
   response.statusCode = 200;
   response.setHeader("Content-Type", "application/json");
   response.write(JSON.stringify({ status: "up" }));
@@ -18,14 +18,14 @@ const health: HTTP.RequestListener = (_request, response): void => {
   });
 };
 
-const shutdown: HTTP.RequestListener = (_request, response): void => {
+const shutdown: HTTP.RequestListener = (_request, response) => {
   response.statusCode = 204;
   response.end(() => {
     Process.kill(Process.pid, "SIGTERM");
   });
 };
 
-const server = HTTP.createServer((request, response): void => {
+const server = HTTP.createServer((request, response) => {
   const url = URL.parse(request.url!);
 
   if (url.path === "/shutdown") {
