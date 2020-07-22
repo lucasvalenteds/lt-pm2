@@ -2,6 +2,12 @@ import * as Console from "console";
 import * as HTTP from "http";
 import * as URL from "url";
 import Process from "process";
+import PM2 from "@pm2/io";
+
+const requestsTotal = PM2.counter({
+  name: "Requests total",
+  historic: false,
+});
 
 const port = Process.env.PORT;
 
@@ -9,19 +15,24 @@ const index: HTTP.RequestListener = (_request, response): void => {
   response.statusCode = 200;
   response.setHeader("Content-Type", "application/json");
   response.write(JSON.stringify({ message: "Hello World" }));
-  response.end();
+  response.end(() => {
+    requestsTotal.inc();
+  });
 };
 
 const shutdown: HTTP.RequestListener = (_request, response): void => {
   response.statusCode = 204;
   response.end(() => {
+    requestsTotal.inc();
     Process.exit(0);
   });
 };
 
 const notFound: HTTP.RequestListener = (_request, response): void => {
   response.statusCode = 404;
-  response.end();
+  response.end(() => {
+    requestsTotal.inc();
+  });
 };
 
 const server = HTTP.createServer((request, response): void => {
