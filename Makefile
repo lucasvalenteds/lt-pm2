@@ -2,7 +2,7 @@ BIN_PM2 = "./node_modules/.bin/pm2"
 BIN_AUTOCANNON = "./node_modules/.bin/autocannon"
 
 SERVICE = "server"
-URL = "http://localhost:8080/"
+URL = "http://localhost:8080"
 SCALE ?= 1
 
 start:
@@ -23,4 +23,7 @@ metrics:
 	@$(BIN_PM2) monit
 
 test:
-	@$(BIN_AUTOCANNON) --connections 120 --method GET --duration 30 $(URL)
+	@$(BIN_AUTOCANNON) --connections 120 --method GET --duration 30 $(URL)/
+
+shutdown:
+	@curl $(URL)/shutdown
