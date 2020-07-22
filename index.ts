@@ -9,8 +9,6 @@ const requestsTotal = PM2.counter({
   historic: false,
 });
 
-const port = Process.env.PORT;
-
 const health: HTTP.RequestListener = (_request, response): void => {
   response.statusCode = 200;
   response.setHeader("Content-Type", "application/json");
@@ -36,6 +34,8 @@ const server = HTTP.createServer((request, response): void => {
     health(request, response);
   }
 });
+
+const port = Process.env.PORT;
 
 server.listen(port, () => {
   Console.debug("Server running on port %d (PID %s)", port, Process.pid);
