@@ -28,25 +28,14 @@ const shutdown: HTTP.RequestListener = (_request, response): void => {
   });
 };
 
-const notFound: HTTP.RequestListener = (_request, response): void => {
-  response.statusCode = 404;
-  response.end(() => {
-    requestsTotal.inc();
-  });
-};
-
 const server = HTTP.createServer((request, response): void => {
   const url = URL.parse(request.url!);
-
-  if (url.path === "/") {
-    return index(request, response);
-  }
 
   if (url.path === "/shutdown") {
     return shutdown(request, response);
   }
 
-  return notFound(request, response);
+  return index(request, response);
 });
 
 server.listen(port, () => {
