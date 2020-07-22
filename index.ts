@@ -38,12 +38,12 @@ const server = HTTP.createServer((request, response): void => {
 });
 
 server.listen(port, () => {
-  Console.debug("Server running on port %d", port);
+  Console.debug("Server running on port %d (PID %s)", port, Process.pid);
 });
 
 Process.on("SIGTERM", () => {
   server.close(() => {
-    Console.debug("Server stopped");
+    Console.debug("Server stopped (PID %s)", Process.pid);
     Process.exit(0);
   });
 });
