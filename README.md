@@ -1,4 +1,4 @@
-# LT: PM2
+# POC: PM2
 
 It demonstrates how to run multiple Node.js processes that serve HTTP requests and manage them using [PM2](https://github.com/Unitech/pm2).
 
